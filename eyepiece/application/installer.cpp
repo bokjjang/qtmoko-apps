@@ -26,13 +26,21 @@ Installer::Installer(QWidget *parent) : QDialog(parent)
 void Installer::start()
 {
     QProcess script(this);
-    script.start("apt-get -y install libdjvulibre21");
-    while( !script.waitForFinished(500) ) {
-        QString txt =  script.readAll().trimmed();
-        if (txt != "")
-            infoLabel->setText(txt);
-        update();
-        QApplication::processEvents();
+    for(int i = 0; i < 2; i++)
+    {
+        if(i == 0) {
+            script.start("apt-get update");
+        } else {
+            script.start("apt-get -y install libdjvulibre21");
+        }
+
+        while( !script.waitForFinished(500) ) {
+            QString txt =  script.readAll().trimmed();
+            if (txt != "")
+                infoLabel->setText(txt);
+            update();
+            QApplication::processEvents();
+        }
     }
     close();
 }
