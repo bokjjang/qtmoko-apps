@@ -28,3 +28,6 @@
 [submodule "qgcide"]
 	path = qgcide
 	url = git://github.com/radekp/qgcide.git
+[submodule "qneoroid"]
+	path = qneoroid
+	url = git://github.com/radekp/qneoroid.git
