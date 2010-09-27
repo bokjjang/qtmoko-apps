@@ -37,7 +37,7 @@ class GoogleSession: public QObject
     virtual ~GoogleSession();
     
     State state() const;
-    int updateContacts(QList<QContact>&, bool skip);
+    int updateContacts(QList<QContact>&, bool skip, bool removeAll);
     int updateGroups();
     static QString stateName(State s);
     

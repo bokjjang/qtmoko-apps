@@ -27,6 +27,8 @@ LoginWindow::LoginWindow(QWidget *parent, Qt::WindowFlags wf)
     passw = new QLineEdit(cfg->value("login/password").toString(),this);
     passw->setEchoMode(QLineEdit::PasswordEchoOnEdit);
 
+    removeAllFirst = new QCheckBox("(DANGEROUS) Remove all contacts", this);
+
     skip = new QCheckBox("Skip without numbers", this);
     skip->setCheckState( (Qt::CheckState) cfg->value("login/skip" ).toInt() );
 
@@ -39,8 +41,9 @@ LoginWindow::LoginWindow(QWidget *parent, Qt::WindowFlags wf)
     grid->addWidget(passw,1,1);
 
     grid->addWidget(state, 2, 0, 1, 2);
-    grid->addWidget(skip, 3, 0, 1, 2);
-    grid->addWidget(save, 4, 0, 1, 2);
+    grid->addWidget(removeAllFirst, 3, 0, 1, 2);
+    grid->addWidget(skip, 4, 0, 1, 2);
+    grid->addWidget(save, 5, 0, 1, 2);
     grid->setSizeConstraint(QLayout::SetMaximumSize);
     QWidget *central = new QWidget();
     central->setLayout(grid);
@@ -65,7 +68,8 @@ void LoginWindow::start()
     sync->start( 
         login->text() , 
         passw->text() ,
-        (bool) skip->checkState()
+        (bool) skip->checkState() ,
+        (bool) removeAllFirst->checkState()
         );
 }
 

@@ -232,13 +232,21 @@ void GoogleSession::fetchContacts()
   http->setHost("www.google.com");
   contactsFetchId = http->request(header);
   setState(FetchingContacts);
-  qLog(Synchronization) << "Fetching conacts...";
+  qLog(Synchronization) << "Fetching contacts...";
 }
 
-int GoogleSession::updateContacts(QList<QContact> &contacts, bool skip) {
+int GoogleSession::updateContacts(QList<QContact> &contacts, bool skip, bool removeAll) {
 
   setState(UpdatingContacts);
   QContactModel filter;
+
+  if (removeAll) {
+    qLog(Synchronization) << "Removing all contacts...";
+    for (int i = filter.count() - 1; i >= 0; i--) {
+      filter.removeContact(filter.contact(i));
+    }
+    qLog(Synchronization) << "Contacts removed";
+  }
 
   for (int i = 0; i < contacts.size(); ++i) {
     QContact gContact = contacts.at(i);

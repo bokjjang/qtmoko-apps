@@ -14,7 +14,7 @@ class GoogleSync: public QObject
     GoogleSync(QObject *parent = NULL);
     virtual ~GoogleSync();
   
-    bool start(const QString &login, const QString &passwd, bool setskip);
+    bool start(const QString &login, const QString &passwd, bool setskip, bool setRemoveAll);
     
   private slots:
     void googleError(GoogleSession::Error err, const QString &reason);
@@ -25,6 +25,7 @@ class GoogleSync: public QObject
     GoogleSession *session;
     bool inProgress;
     bool skip;
+    bool removeAll;
     QHash<QString, QString> groupMap;
 
   signals:

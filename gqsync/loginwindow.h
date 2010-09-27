@@ -27,6 +27,7 @@ private:
         QLineEdit* login;
         QLineEdit* passw;
 
+        QCheckBox* removeAllFirst;
         QCheckBox* save;
         QCheckBox* skip;
 
