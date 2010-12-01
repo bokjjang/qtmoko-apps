@@ -29,7 +29,8 @@ MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags)
     weatherInfo->show();
     QHBoxLayout *layout = new QHBoxLayout(this);
     layout->addWidget(weatherInfo);
-     
+
+    connect(we,SIGNAL(ready()),this,SLOT(getWeather()));
     refresh();
 }
 
@@ -85,9 +86,15 @@ void MainWindow::refresh()
 {
 
     we->exec();
-    weather = we->getToday();
-    if(!weather.isEmpty())
-    {
-        weatherInfo->getInfo(weather);
-    }
+//    weather = we->getToday();
+//    if(!weather.isEmpty())
+//    {
+//        weatherInfo->getInfo(weather);
+//    }
+}
+void MainWindow::getWeather()
+{
+	weather=we->getToday();
+	if(!weather.isEmpty())
+		weatherInfo->getInfo(weather);
 }

@@ -40,6 +40,8 @@ class MainWindow : public //QMainWindow
         void aboutQt();
         void settings();
         void refresh();
+	////
+	void getWeather();
 };
 
 #endif // MAINWINDOW_H

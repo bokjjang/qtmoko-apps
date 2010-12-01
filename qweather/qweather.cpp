@@ -70,6 +70,7 @@ void QWeather::requestDone(bool error)
     {
         qDebug() << "Content: " << data.constData();
         xmldoc = data.constData();
+	emit ready();
     }
 }
 
@@ -80,6 +81,7 @@ void QWeather::uncompress(QByteArray data)
     char *buff = inf(data.constData(), data.size());
     xmldoc = QString::fromUtf8(buff);
     free(buff);
+    emit ready();
 }
 
 void QWeather::requestState(int param)

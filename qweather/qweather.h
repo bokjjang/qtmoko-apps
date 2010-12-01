@@ -59,6 +59,8 @@ signals:
     void            settingsReaded();
     void            streamReadFinished(QByteArray data);
     void            extractFinished(QString doc);
+    /////////////
+    void	    ready();
 };
 
 
