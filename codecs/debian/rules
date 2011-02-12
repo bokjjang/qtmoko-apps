@@ -1,0 +1,21 @@
+#!/usr/bin/make -f
+
+build:
+
+clean:
+	rm -rf debian/tmp
+	rm -f debian/files
+
+binary: build
+	mkdir -p debian/tmp/opt/qtmoko/lib
+	mkdir -p debian/tmp/opt/qtmoko/plugins/codecs
+	# Note that here you need qtmoko built and point QTMOKO_BUILD_DIR
+	# to the build dir. To do this correctly qtmoko should produce this
+	# package.
+	cp -ax $(QTMOKO_BUILD_DIR)/sdk/lib/libmad.so* debian/tmp/opt/qtmoko/lib
+	cp -ax $(QTMOKO_BUILD_DIR)/src/3rdparty/plugins/codecs/libmad/libmadplugin.so debian/tmp/opt/qtmoko/plugins/codecs
+	install -d debian/tmp/DEBIAN
+	dpkg-gencontrol
+	chown -R root:root debian/tmp/opt
+	chmod -R u+w,go=rX debian/tmp/opt
+	dpkg --build debian/tmp ..
