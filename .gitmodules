@@ -9,7 +9,7 @@
 	url = git://github.com/radekp/arora-neo.git
 [submodule "qtbackup"]
 	path = qtbackup
-	url = git://github.com/ghislain/qtbackup.git
+	url = git://github.com/radekp/qtbackup.git
 [submodule "nerongps"]
 	path = nerongps
 	url = git://github.com/radekp/NeronGPS.git
